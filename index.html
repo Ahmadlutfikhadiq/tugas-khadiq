@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beauty Products Showcase with Popup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom scrollbar for carousels */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* Popup overlay & card max width */
+      #popup-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+      /* Animate popup */
+      @keyframes popupFadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      #popup-content {
+        animation: popupFadeIn 0.3s ease forwards;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow mb-8">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-pink-600 select-none">BeautyBay</h1>
+        <nav class="space-x-6 hidden md:flex text-gray-600 font-medium">
+          <a href="#" class="hover:text-pink-600 transition">Home</a>
+          <a href="#" class="hover:text-pink-600 transition">Bestie Decks</a>
+          <a href="#" class="hover:text-pink-600 transition">Flash Sale</a>
+          <a href="#" class="hover:text-pink-600 transition">Exclusive</a>
+        </nav>
+        <button id="open-popup-btn" aria-label="Open special gift popup" class="md:hidden text-pink-600 font-semibold focus:outline-none focus:ring-2 focus:ring-pink-600">Gift 🎁</button>
+      </div>
+    </header>
+
+    <!-- Main container -->
+    <main class="container mx-auto px-4">
+      <!-- Featured Carousel Placeholder -->
+      <section aria-label="Featured beauty products carousel" class="mb-12 select-none">
+        <div class="relative rounded-lg overflow-hidden shadow-lg">
+          <img
+            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e365b7e2-cac9-4afe-994a-7dca9d402d36.png"
+            alt="Banner showing featured beauty products with soft pink and white theme, elegant floral elements and product highlights"
+            class="w-full h-auto object-cover"
+            onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/96b08041-6c1b-47aa-a7b4-cf206116102a.png';"
+          />
+        </div>
+      </section>
+
+      <!-- Bestie Decks Carousel -->
+      <section aria-label="Bestie decks for you" class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4 border-b border-pink-300 pb-2">Bestie Decks For You</h2>
+        <div class="flex overflow-x-auto scrollbar-hide space-x-6 pb-4" tabindex="0">
+          <!-- Product cards -->
+          <article class="flex-shrink-0 w-52 bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4df54029-d1ab-4440-a360-aec2c2dc379d.png"
+              alt="Green cleanser bottle with elegant gold pump and minimalist label on a white background with soft shadows"
+              class="rounded-t-lg w-full object-cover h-48"
+              loading="lazy"
+              onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f6acb423-67cb-4066-b147-b1266ea1598e.png';"
+            />
+            <div class="p-3 space-y-2">
+              <h3 class="font-semibold text-pink-600 truncate">OSMETTE SHAMPOO</h3>
+              <p class="text-sm text-gray-500 line-through">Rp 119.000</p>
+              <p class="font-bold text-pink-600">Rp 101.150</p>
+              <div class="flex items-center justify-between text-xs text-pink-500 font-semibold">
+                <span>Sale 15%</span>
+                <button title="Add to wishlist" aria-label="Add OSMETTE SHAMPOO to wishlist" class="focus:outline-none focus:ring-1 focus:ring-pink-600">♡</button>
+              </div>
+            </div>
+          </article>
+          <!-- Repeat with other bestie deck products: -->
+          <article class="flex-shrink-0 w-52 bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/44d9f95e-1a34-4198-834f-5248de6ecc86.png"
+              alt="Round black compact makeup case with subtle shadow and soft background in light pink"
+              class="rounded-t-lg w-full object-cover h-48"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/220x220?text=Image+Not+Available';"
+            />
+            <div class="p-3 space-y-2">
+              <h3 class="font-semibold text-pink-600 truncate">BLACK RADIANCE COMPACT</h3>
+              <p class="text-sm text-gray-500 line-through">Rp 180.000</p>
+              <p class="font-bold text-pink-600">Rp 90.000</p>
+              <div class="flex items-center justify-between text-xs text-pink-500 font-semibold">
+                <span>Sale 50%</span>
+                <button title="Add to wishlist" aria-label="Add BLACK RADIANCE COMPACT to wishlist" class="focus:outline-none focus:ring-1 focus:ring-pink-600">♡</button>
+              </div>
+            </div>
+          </article>
+          <article class="flex-shrink-0 w-52 bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce63bbf8-b559-4644-b577-108cb761bcb6.png"
+              alt="Elegant tall perfume bottle with transparent glass and black cap with soft light reflections"
+              class="rounded-t-lg w-full object-cover h-48"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/220x220?text=Image+Not+Available';"
+            />
+            <div class="p-3 space-y-2">
+              <h3 class="font-semibold text-pink-600 truncate">COSRX PERFUME</h3>
+              <p class="text-sm text-gray-500 line-through">Rp 150.000</p>
+              <p class="font-bold text-pink-600">Rp 112.500</p>
+              <div class="flex items-center justify-between text-xs text-pink-500 font-semibold">
+                <span>Sale 25%</span>
+                <button title="Add to wishlist" aria-label="Add COSRX PERFUME to wishlist" class="focus:outline-none focus:ring-1 focus:ring-pink-600">♡</button>
+              </div>
+            </div>
+          </article>
+          <article class="flex-shrink-0 w-52 bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c83ee62c-41e1-4a78-820d-c74658782ae9.png"
+              alt="Bright yellow cylindrical skincare container with shadow and neat label"
+              class="rounded-t-lg w-full object-cover h-48"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/220x220?text=Image+Not+Available';"
+            />
+            <div class="p-3 space-y-2">
+              <h3 class="font-semibold text-pink-600 truncate">VITC SKIN</h3>
+              <p class="text-sm text-gray-500 line-through">Rp 80.000</p>
+              <p class="font-bold text-pink-600">Rp 56.000</p>
+              <div class="flex items-center justify-between text-xs text-pink-500 font-semibold">
+                <span>Sale 30%</span>
+                <button title="Add to wishlist" aria-label="Add VITC SKIN to wishlist" class="focus:outline-none focus:ring-1 focus:ring-pink-600">♡</button>
+              </div>
+            </div>
+          </article>
+          <article class="flex-shrink-0 w-52 bg-white rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1b96176c-96db-4641-b02d-ef972938a2b9.png"
+              alt="Minimalist white cream tube with soft lighting and shadow on pink surface"
+              class="rounded-t-lg w-full object-cover h-48"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/220x220?text=Image+Not+Available';"
+            />
+            <div class="p-3 space-y-2">
+              <h3 class="font-semibold text-pink-600 truncate">MOISTURE ULTRA CREAM</h3>
+              <p class="text-sm text-gray-500 line-through">Rp 200.000</p>
+              <p class="font-bold text-pink-600">Rp 140.000</p>
+              <div class="flex items-center justify-between text-xs text-pink-500 font-semibold">
+                <span>Sale 30%</span>
+                <button title="Add to wishlist" aria-label="Add MOISTURE ULTRA CREAM to wishlist" class="focus:outline-none focus:ring-1 focus:ring-pink-600">♡</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Flash Sale Banner -->
+      <section class="mb-12 p-4 bg-gradient-to-r from-pink-400 via-pink-300 to-pink-200 rounded-lg shadow-md select-none">
+        <h3 class="text-3xl font-bold text-white uppercase text-center mb-1">Online Special Flash Sale</h3>
+        <p class="text-center text-white font-semibold tracking-wide" id="flash-sale-timer" aria-live="polite" aria-atomic="true" role="timer">Now Live: <span id="countdown">00:19:19</span></p>
+      </section>
+
+      <!-- Flash Sale Products Carousel -->
+      <section aria-label="Flash sale products" class="mb-12">
+        <div class="flex overflow-x-auto scrollbar-hide space-x-6 pb-4" tabindex="0">
+          <!-- Product cards similar to above with sales highlight -->
+          <article class="flex-shrink-0 w-48 bg-pink-50 rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-1 border border-pink-300">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b6a11488-66d0-4acf-967c-0b4181468ae6.png"
+              alt="Pink nail polish bottle with brush in soft rosy background"
+              class="rounded-t-lg w-full object-cover h-40"
+              loading="lazy"
+              onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f1374a7e-32c6-4e10-bb48-94938a2c72a4.png';"
+            />
+            <div class="p-3">
+              <h4 class="font-semibold text-pink-700 truncate">NAIL POLISH</h4>
+              <p class="text-sm line-through text-pink-500">Rp 30.000</p>
+              <p class="font-bold text-pink-700">Rp 15.000</p>
+              <div class="text-xs font-semibold text-red-600">50% OFF</div>
+            </div>
+          </article>
+          <article class="flex-shrink-0 w-48 bg-pink-50 rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-1 border border-pink-300">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/43f9a59b-7e2d-4eb8-b4cd-f8c7c40b167a.png"
+              alt="Green hydrating face mask sachet with dewy leaves and fresh skin concept"
+              class="rounded-t-lg w-full object-cover h-40"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/180x180?text=Image+Not+Available';"
+            />
+            <div class="p-3">
+              <h4 class="font-semibold text-pink-700 truncate">HYDRATING MASK</h4>
+              <p class="text-sm line-through text-pink-500">Rp 40.000</p>
+              <p class="font-bold text-pink-700">Rp 20.000</p>
+              <div class="text-xs font-semibold text-red-600">50% OFF</div>
+            </div>
+          </article>
+          <article class="flex-shrink-0 w-48 bg-pink-50 rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-1 border border-pink-300">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/16303ec4-1993-4531-85b4-8774f0bb7216.png"
+              alt="Green skincare cream tube on white background with fresh natural aesthetics"
+              class="rounded-t-lg w-full object-cover h-40"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/180x180?text=Image+Not+Available';"
+            />
+            <div class="p-3">
+              <h4 class="font-semibold text-pink-700 truncate">SKIN CREAM</h4>
+              <p class="text-sm line-through text-pink-500">Rp 45.000</p>
+              <p class="font-bold text-pink-700">Rp 22.500</p>
+              <div class="text-xs font-semibold text-red-600">50% OFF</div>
+            </div>
+          </article>
+          <article class="flex-shrink-0 w-48 bg-pink-50 rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-1 border border-pink-300">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/95ca5d0f-1cd4-4a97-92b5-c6ae13c17f0b.png"
+              alt="Transparent skincare serum bottle with dropper and liquid inside glowing softly"
+              class="rounded-t-lg w-full object-cover h-40"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/180x180?text=Image+Not+Available';"
+            />
+            <div class="p-3">
+              <h4 class="font-semibold text-pink-700 truncate">SERUM</h4>
+              <p class="text-sm line-through text-pink-500">Rp 60.000</p>
+              <p class="font-bold text-pink-700">Rp 30.000</p>
+              <div class="text-xs font-semibold text-red-600">50% OFF</div>
+            </div>
+          </article>
+          <article class="flex-shrink-0 w-48 bg-pink-50 rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-1 border border-pink-300">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0960ae05-ac0b-45bf-8fb0-e6306ea31626.png"
+              alt="Clear beauty spray bottle with white cap on pink flower petals background"
+              class="rounded-t-lg w-full object-cover h-40"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/180x180?text=Image+Not+Available';"
+            />
+            <div class="p-3">
+              <h4 class="font-semibold text-pink-700 truncate">BEAUTY SPRAY</h4>
+              <p class="text-sm line-through text-pink-500">Rp 80.000</p>
+              <p class="font-bold text-pink-700">Rp 40.000</p>
+              <div class="text-xs font-semibold text-red-600">50% OFF</div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Popup Overlay & Modal -->
+    <div id="popup-overlay" class="fixed inset-0 hidden items-center justify-center z-50" aria-hidden="true" role="dialog" aria-modal="true">
+      <div id="popup-content" class="bg-white rounded-lg shadow-lg max-w-md w-full mx-4 p-6 text-center relative" role="document" tabindex="0">
+        <h2 class="text-xl font-semibold mb-4 text-pink-700">Special Gift Only for Bestie!</h2>
+        <p class="mb-4">Pick your gift and enter your email address below to claim your special benefit.</p>
+
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="gift-item bg-pink-100 rounded-lg p-4 cursor-pointer hover:bg-pink-300 transition" tabindex="0" role="button" aria-pressed="false" aria-label="Select gift 1">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0c6bfd0d-b959-41d2-98c4-e7a1eed2f489.png"
+              alt="Red gift box with a shiny golden ribbon tied in a bow on a white background"
+              class="mx-auto mb-2"
+              onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/14558088-ccb3-4570-8c50-75aadbcf473e.png';"
+            />
+          </div>
+          <div class="gift-item bg-pink-100 rounded-lg p-4 cursor-pointer hover:bg-pink-300 transition" tabindex="0" role="button" aria-pressed="false" aria-label="Select gift 2">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/41753895-324b-4e51-a940-37eb6a57ed54.png"
+              alt="Red gift box with a shiny golden ribbon tied in a bow on a white background"
+              class="mx-auto mb-2"
+              onerror="this.src='https://placehold.co/100x100?text=Image+Unavailable';"
+            />
+          </div>
+          <div class="gift-item bg-pink-100 rounded-lg p-4 cursor-pointer hover:bg-pink-300 transition" tabindex="0" role="button" aria-pressed="false" aria-label="Select gift 3">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/02ae5dc9-07d9-426a-91f2-775538773872.png"
+              alt="Red gift box with a shiny golden ribbon tied in a bow on a white background"
+              class="mx-auto mb-2"
+              onerror="this.src='https://placehold.co/100x100?text=Image+Unavailable';"
+            />
+          </div>
+          <div class="gift-item bg-pink-100 rounded-lg p-4 cursor-pointer hover:bg-pink-300 transition" tabindex="0" role="button" aria-pressed="false" aria-label="Select gift 4">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25790dd4-7d57-4ab6-8b7a-70ed240caa8e.png"
+              alt="Red gift box with a shiny golden ribbon tied in a bow on a white background"
+              class="mx-auto mb-2"
+              onerror="this.src='https://placehold.co/100x100?text=Image+Unavailable';"
+            />
+          </div>
+          <div class="gift-item bg-pink-100 rounded-lg p-4 cursor-pointer hover:bg-pink-300 transition" tabindex="0" role="button" aria-pressed="false" aria-label="Select gift 5">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4c2a3a93-066a-4e9f-af30-fc053e634480.png"
+              alt="Red gift box with a shiny golden ribbon tied in a bow on a white background"
+              class="mx-auto mb-2"
+              onerror="this.src='https://placehold.co/100x100?text=Image+Unavailable';"
+            />
+          </div>
+          <div class="gift-item bg-pink-100 rounded-lg p-4 cursor-pointer hover:bg-pink-300 transition" tabindex="0" role="button" aria-pressed="false" aria-label="Select gift 6">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bcf2f6a0-d5dc-410a-93c1-20ab1d0eaf52.png"
+              alt="Red gift box with a shiny golden ribbon tied in a bow on a white background"
+              class="mx-auto mb-2"
+              onerror="this.src='https://placehold.co/100x100?text=Image+Unavailable';"
+            />
+          </div>
+        </div>
+
+        <form id="gift-form" class="space-y-4 text-left">
+          <label for="email" class="block font-medium text-pink-700">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required class="w-full border border-pink-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-600" aria-describedby="emailHelp" />
+          <p id="emailHelp" class="text-xs text-gray-500">We'll never share your email with anyone else.</p>
+          <button type="submit" class="w-full bg-pink-600 text-white font-semibold rounded py-2 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-600 transition">Get Your Gift</button>
+        </form>
+
+        <button aria-label="Close popup" id="close-popup-btn" class="absolute top-3 right-3 text-pink-600 hover:text-pink-900 focus:outline-none focus:ring-2 focus:ring-pink-600 font-bold text-2xl leading-none">&times;</button>
+      </div>
+    </div>
+
+    <script>
+      // Popup controls
+      const popupOverlay = document.getElementById("popup-overlay");
+      const openBtn = document.getElementById("open-popup-btn");
+      const closeBtn = document.getElementById("close-popup-btn");
+      const giftItems = document.querySelectorAll(".gift-item");
+      const giftForm = document.getElementById("gift-form");
+      const emailInput = document.getElementById("email");
+
+      // Keeps track of the selected gift index
+      let selectedGiftIndex = null;
+
+      function openPopup() {
+        popupOverlay.classList.remove("hidden");
+        popupOverlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden"; // prevent background scroll
+        giftForm.reset();
+        selectedGiftIndex = null;
+        giftItems.forEach((item) => {
+          item.setAttribute("aria-pressed", "false");
+          item.classList.remove("ring", "ring-pink-600", "bg-pink-300");
+        });
+        // Focus popup container for a11y
+        document.getElementById("popup-content").focus();
+      }
+      function closePopup() {
+        popupOverlay.classList.add("hidden");
+        popupOverlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "auto";
+        openBtn.focus();
+      }
+
+      // Open popup button
+      openBtn.addEventListener("click", openPopup);
+
+      // Close popup button
+      closeBtn.addEventListener("click", closePopup);
+
+      // Close popup on clicking outside content
+      popupOverlay.addEventListener("click", (e) => {
+        if (e.target === popupOverlay) {
+          closePopup();
+        }
+      });
+
+      // Gift item click selector with keyboard support (enter & space)
+      giftItems.forEach((item, idx) => {
+        item.addEventListener("click", () => selectGift(idx));
+        item.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            selectGift(idx);
+          }
+        });
+      });
+
+      function selectGift(index) {
+        selectedGiftIndex = index;
+        giftItems.forEach((item, idx) => {
+          const pressed = idx === index ? "true" : "false";
+          item.setAttribute("aria-pressed", pressed);
+          if (idx === index) {
+            item.classList.add("ring", "ring-pink-600", "bg-pink-300");
+          } else {
+            item.classList.remove("ring", "ring-pink-600", "bg-pink-300");
+          }
+        });
+      }
+
+      // Handle form submit
+      giftForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (selectedGiftIndex === null) {
+          alert("Please select a gift before submitting.");
+          return;
+        }
+        if (!emailInput.checkValidity()) {
+          alert("Please enter a valid email address.");
+          emailInput.focus();
+          return;
+        }
+        // Simulate gift claim processing
+        alert(`Thank you! You have claimed gift #${selectedGiftIndex + 1}.\nA confirmation was sent to ${emailInput.value}.`);
+        closePopup();
+      });
+
+      // Flash sale countdown clock
+      const countdownElem = document.getElementById("countdown");
+      // Countdown duration example: 19 mins 19 secs
+      let countdownSeconds = 19 * 60 + 19;
+
+      function updateCountdown() {
+        let minutes = Math.floor(countdownSeconds / 60);
+        let seconds = countdownSeconds % 60;
+        countdownElem.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        if (countdownSeconds > 0) {
+          countdownSeconds--;
+        } else {
+          countdownElem.textContent = "00:00";
+        }
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>
